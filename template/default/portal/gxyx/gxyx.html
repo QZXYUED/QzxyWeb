@@ -1,0 +1,333 @@
+<!--使用通用模板-->
+{extend name="portal/frame" /}
+
+<!--特殊样式-->
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="{$Think.const.STATIC_ROOT}/css/skin/portal/gxyx.css" media="screen and (min-width:501px)" />
+<link rel="stylesheet" href="{$Think.const.STATIC_ROOT}/css/lightslider.min.css">
+<link rel="stylesheet" type="text/css" href="{$Think.const.STATIC_ROOT}/css/mobile/m_portal/m-gxyx.css" media="screen and (max-width: 500px)">
+<link href="{$Think.const.STATIC_ROOT}/css/mobile/m_home/banner.css" rel="stylesheet" media="screen and (max-width:500px)">
+{/block}
+
+<!--js模块-->
+{block name="js"}
+<script src="{$Think.const.STATIC_ROOT}/js/jquery.js"></script>
+<script src="{$Think.const.STATIC_ROOT}/js/lightslider.min.js"></script>
+<!--[if lte IE 9]>
+<script src="{$Think.const.STATIC_ROOT}/js/portal/respond.src.js" type="text/javascript" charset="utf-8"></script>
+<![endif]-->
+<!--[if lte IE 8]>
+<script src="{$Think.const.STATIC_ROOT}/js/portal/mobileMenu(forIE8).js" charset="utf-8"></script>
+<![endif]-->
+{/block}
+
+<!--主体部分-->
+{block name="body"}
+{include file="portal/gxyx/gxyx_bn" /}
+<div class="o__main">
+	<div class="gxyx">
+		<div class="container">
+			<!-- 这里我把左右看成一个整体，然后用右侧的栏目名称来命名这个大块 -->
+			<section class="gxNews" id="gxNews">
+				<div class="gxNews">
+					<div class="leftBox">
+						<div class="sliderBox">
+							<ul class="sliderMain">
+								{if isset($threadlist['new'])}
+								{volist name="threadlist.new" id="t" length="6"}
+								<li>
+									<img src="{$t.coverimg}" />
+									<div>
+										<a href="/threads/view?id={$t.id}&from=7">{$t.title}</a>
+									</div>
+								</li>
+								{/volist}
+								{/if}
+							</ul>
+							<script>
+								$(document).ready(function () {
+									$('.sliderMain').lightSlider({
+										gallery: false,
+										item: 1,
+										slideMargin: 0,
+										speed: 1000,
+										pause: 5000,
+										auto: true,
+										loop: true,
+										mode: 'slide',
+									});
+									$('.lSPager').addClass('opacity');
+								});
+							</script>
+						</div>
+					</div>
+
+					<div class="rightList">
+						<div class="rightListBox">
+							<div class="rightColumnName">
+								<a>最新资讯</a>
+							</div>
+							<div class="rightListContent">
+								<ul>
+									{if isset($threadlist['new'])}
+									{volist name="threadlist.new" id="t" offset="6" length="12"}
+									<li><a href="/threads/view?id={$t.id}&from=7">{$t.title}</a></li>
+									{/volist}
+									{/if}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--移动端-->
+			<div id="m_main">
+				<div class="fullwidthbanner-container">
+					<div class="fullwidthbanner">
+						<ul id="m_img_link">
+							{if isset($threadlist['new'])}
+							{volist name="threadlist.new" id="t" length="6"}
+							<li data-transition="slideright">
+								<img src="{$t.coverimg}" alt="" />
+								<div class="m_img_cover"></div>
+							</li>
+							{/volist}
+							{/if}
+						</ul>
+						<div class="tp-bannertimer tp-bottom"></div>
+					</div>
+				</div>
+				<section id="testiomonial" class="testimonial">
+					<div class="main_testimonial_area">
+						<div class="overlay"></div>
+						<div class="information-container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="head_title m-y-3 p-t-2  wow fadeInUp">
+										<div class="row">
+											<div class="col-md-4">
+												<h2>最新资讯</h2>
+											</div>
+											<div class="col-md-8">
+
+												<div class="rightList" id="rightList">
+													<div class="rightListBox">
+														<div class="rightColumnName"></div>
+														<div class="rightListContent">
+															<ul>
+																{if isset($threadlist['new'])}
+																{volist name="threadlist.new" id="t" offset="6" length="12"}
+																<li><a href="/threads/view?id={$t.id}&from=7">{$t.title}</a></li>
+																{/volist}
+																{/if}
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="testimonial_content text-center p-y-3 m-b-3">
+										<div class="test_slider">
+											<div class="single_test">
+												<a href="#">查看更多</a>
+											</div>
+										</div>
+									</div>
+								</div> <!-- End off col-md-12 -->
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<section class="gxHistory">
+				<div class="gxHistory">
+					<div class="leftBox">
+						<div class="leftColumnName">
+							<a>国学入门</a>
+						</div>
+						<div class="leftColumnContent">
+							<div class="leftCardBox">
+								{if isset($threadlist['start'])}
+								{volist name="threadlist.start" id="t" length="2"}
+								<div class="leftCardItem">
+									<a href="/threads/view?id={$t.id}&from=7" class="CardCoverimg"><img src="{$t.coverimg}" alt=""></a>
+									<div class="CardIntro">
+										<a href="/threads/view?id={$t.id}&from=7" class="Intro_tit">{$t.title}</a>
+										<a href="/threads/view?id={$t.id}&from=7" class="Intro_des phoneNone">{$t.descrip}</a>
+									</div>
+								</div>
+								{/volist}
+								{/if}
+							</div>
+							<div class="leftListBox">
+								<ul>
+									{if isset($threadlist['start'])}
+									{volist name="threadlist.start" id="t" offset="2" length="8"}
+									<li><a href="/threads/view?id={$t.id}&from=7">{$t.title}</a></li>
+									{/volist}
+									{/if}
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="rightList phoneNone">
+						<div class="rightListBox">
+							<div class="rightColumnName">
+								<a>历史春秋</a>
+							</div>
+							<div class="rightListContent">
+								<ul>
+									{if isset($threadlist['history'])}
+									{volist name="threadlist.history" id="t" length="10"}
+									<li><a href="/threads/view?id={$t.id}&from=7">{$t.title}</a></li>
+									{/volist}
+									{/if}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="gxCulture">
+				<div class="gxCulture">
+					<div class="leftBox">
+						<div class="leftColumnName" style="font-weight:bold">
+							<a>国学宝典</a>
+						</div>
+						<div class="leftColumnContent">
+							<div class="leftBookBox">
+								{if isset($threadlist['dictionary'])}
+								{volist name="threadlist.dictionary" id="t" length="8"}
+								<div class="leftBookItem">
+									<a href="/threads/view?id={$t.id}&from=7"><img src="{$t.coverimg}"></a>
+									<a href="/threads/view?id={$t.id}&from=7">{$t.title}</a>
+								</div>
+								{/volist}
+								{/if}
+							</div>
+						</div>
+					</div>
+					<div class="rightList">
+						<div class="rightListBox">
+							<div class="rightColumnName">
+								<a>礼乐文明</a>
+							</div>
+							<div class="rightCardBox">
+								{if isset($threadlist['civilize'])}
+								{volist name="threadlist.civilize" id="t" length="2"}
+								<div class="rightCardItem">
+									<a href="/threads/view?id={$t.id}&from=7" class="CardCoverimg"><img src="{$t.coverimg}" alt=""></a>
+									<div class="CardIntro">
+										<a href="/threads/view?id={$t.id}&from=7" class="Intro_tit">{$t.title}</a>
+										<a href="/threads/view?id={$t.id}&from=7" class="Intro_des">{$t.descrip}</a>
+									</div>
+								</div>
+								{/volist}
+								{/if}
+							</div>
+							<div class="rightListContent">
+								<ul>
+									{if isset($threadlist['civilize'])}
+									{volist name="threadlist.civilize" id="t" offset="2" length="3"}
+									<li><a href="/threads/view?id={$t.id}&from=7">{$t.title}</a></li>
+									{/volist}
+									{/if}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="gxNetResources">
+				<div class="gxNetResources">
+					<div class="leftBox">
+						<div class="leftColumnName">
+							<a>百家争鸣</a>
+						</div>
+						<div class="leftColumnContent">
+							<div class="leftCardBox">
+								{if isset($threadlist['dispute'])}
+								{volist name="threadlist.dispute" id="t" length="2"}
+								<div class="leftCardItem">
+									<a href="/threads/view?id={$t.id}&from=7" class="CardCoverimg"><img src="{$t.coverimg}" alt=""></a>
+									<div class="CardIntro">
+										<a href="/threads/view?id={$t.id}&from=7" class="Intro_tit">{$t.title}</a>
+										<a href="/threads/view?id={$t.id}&from=7" class="Intro_des phoneNone">{$t.descrip}</a>
+									</div>
+								</div>
+								{/volist}
+								{/if}
+							</div>
+							<div class="leftListBox">
+								<ul>
+									{if isset($threadlist['dispute'])}
+									{volist name="threadlist.dispute" id="t" offset="2" length="8"}
+									<li class="ri-li"><a href="/threads/view?id={$t.id}&from=7" class="ri-a">{$t.title}</a></li>
+									{/volist}
+									{/if}
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="rightList phoneNone">
+						<div class="rightListBox">
+							<div class="rightColumnName">
+								<a>同道中人</a>
+							</div>
+							<div class="rightColumnContent">
+								<div class="rightPeopleBox">
+									{if isset($threadlist['cr'])}
+									{volist name="threadlist.cr" id="t" length="6"}
+									<div class="rightPeople">
+										<a href="/threads/view?id={$t.id}&from=7"><img src="{$t.coverimg}"></a>
+										<a href="/threads/view?id={$t.id}&from=7">{$t.title}</a>
+									</div>
+									{/volist}
+									{/if}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="{$Think.const.STATIC_ROOT}/js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="{$Think.const.STATIC_ROOT}/js/jquery.themepunch.plugins.min.js"></script>
+<script>
+	//清泽专题轮播图
+	$(document).ready(function () {
+		if ($.fn.cssOriginal != undefined)
+			$.fn.css = $.fn.cssOriginal;
+		$('.fullwidthbanner').revolution({
+			delay: 9000,
+			startwidth: 1170,
+			startheight: 420,
+			onHoverStop: "on",
+			navigationType: "none",
+			soloArrowLeftHOffset: 0,
+			soloArrowLeftVOffset: 0,
+			soloArrowRightHOffset: 0,
+			soloArrowRightVOffset: 0,
+			touchenabled: "on",
+			fullWidth: "on",
+			shadow: 0
+		});
+	});
+	//]]>
+</script>
+<script>
+	$(document).ready(function () {
+		let clientWidth = $(window).width();
+		let setWidth = 500;
+		if (clientWidth > setWidth) {
+			$("#m_main").css("display", "none");
+		} else {
+			$("#gxNews").css("display", "none");
+			$(".o__nav").css("display", "none");
+		}
+	})
+</script>
+{/block}
