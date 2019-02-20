@@ -142,7 +142,8 @@
                                     </div>
                                     <div class="col-md-8 columnContainer">
 
-                                        
+                                        <?php $k = 0; ?>
+                                        {if isset($info)}
                                         {volist name="info" id="info" length="5"}
                                         <div class="messageItem">
                                             <div class="messageItem_date"><span class="span-1">
@@ -156,7 +157,7 @@
                                                 主要用于敬神，围绕神庙和祭祀、纪念活动进行创作... </h6>
                                         </div>
                                         {/volist}
-                                        
+                                        {/if}
                                     </div>
                                 </div>
                             </div>
